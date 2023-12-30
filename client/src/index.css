@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+  font-family: 'ooo';
+  src: url('./font/Orkney-Light.otf') format('opentype');
+  font-weight: 300; /* Light */
+}
+
+@font-face {
+  font-family: 'ooo';
+  src: url('./font/Orkney-Medium.otf') format('opentype');
+  font-weight: 500; /* Medium */
+}
+
+@font-face {
+  font-family: 'ooo';
+  src: url('./font/Orkney-Regular.otf') format('opentype');
+  font-weight: normal; /* Regular */
+}
+
+@font-face {
+  font-family: 'ooo';
+  src: url('./font/Orkney-Bold.otf') format('opentype');
+  font-weight: bold; /* Bold */
+}
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: ooo;
+}
