@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require('cors');
 const app = express()
+app.use(express.json());
 const port = 3000
 app.use(cors());
 mongoose.connect("mongodb://127.0.0.1:27017/jobs",{ useNewUrlParser: true,useUnifiedTopology: true});
@@ -16,6 +17,11 @@ mongoose.connection.once('open', () => {
 
 const jobsSchema = require("./models/jobsSchema");
 
+const formatDate = (date) => {
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  return date.toLocaleDateString(undefined, options);
+};
+
 app.get("/api/jobs", async function(req, res) {
     try {
       const products = await jobsSchema.find();
@@ -23,6 +29,20 @@ app.get("/api/jobs", async function(req, res) {
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
+    }
+  });
+  app.post("/api/addjobs", async function(req, res) {
+    try {
+        // Assuming req.body contains the job data
+      const newJob = new jobsSchema(req.body);
+  
+      // Save the job to the database
+      await newJob.save();
+  
+      res.status(201).json({ message: 'Job added successfully for sever' });
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
     }
   });
   
