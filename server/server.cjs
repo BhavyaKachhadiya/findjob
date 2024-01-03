@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
+const { URL } = require('url');
 const cors = require('cors');
 const app = express()
 app.use(express.json());
@@ -43,6 +44,52 @@ app.get("/api/jobs", async function(req, res) {
     }
   });
   
+  app.get('/api/tags', async (req, res) => {
+    try {
+      const tags = await jobsSchema.distinct('tags');
+      res.json(tags);
+    } catch (error) {
+      console.error('Error fetching tags:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+  
+  app.get('/api/companyName', async (req, res) => {
+    try {
+      const companyName = await jobsSchema.distinct('companyName');
+      res.json(companyName);
+    } catch (error) {
+      console.error('Error fetching companyName:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+  app.get('/api/jobs/filter', async (req, res) => {
+    const { tags, companyName } = req.query;
+  
+    try {
+      // Start with a base query
+      let query = {};
+  
+      if (tags) {
+        const selectedTags = tags.split(',');
+        query.tags = { $in: selectedTags };
+      }
+  
+      if (companyName) {
+        const selectedCompanyName = companyName.split(',');
+        query.companyName = { $in: selectedCompanyName };
+      }
+  
+      // Use the Mongoose find method to filter jobs
+      const filteredJobs = await jobsSchema.find(query);
+  
+      res.json(filteredJobs);
+    } catch (error) {
+      console.error('Error fetching filtered jobs:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

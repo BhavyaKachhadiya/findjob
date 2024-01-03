@@ -79,8 +79,8 @@ function Jobcard({ job }) {
               </div>
               <div className="jobs-title pl-4 flex justify-between items-center">
                 <h2 className="text-2xl font-semibold">{job.post}</h2>
-                <div className="mr-2">
-                  <img src={job.logo} className="rounded-full " width="40px" alt="" />
+                <div className="mr-2 rounded-full overflow-hidden">
+                  <img src={job.logo}  width="50px" alt="" />
                 </div>
               </div>
               <div className="tags flex pl-4 mt-4 flex-wrap gap-2">

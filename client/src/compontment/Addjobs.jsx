@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
 const Addjobs = () => {
+  function trim(str) {
+    return str.replace(/^\s+|\s+$/g, '');
+  }
+
   const [jobData, setJobData] = useState({
     companyName: '',
     logo:'',
@@ -19,12 +23,12 @@ const Addjobs = () => {
     const { name, value } = e.target;
     setJobData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: trim(value),
     }));
   };
 
   const handleTagsChange = (e) => {
-    const tagsArray = e.target.value.split(',');
+    const tagsArray = e.target.value.split(',').map((tag) => trim(tag));
     setJobData((prevData) => ({
       ...prevData,
       tags: tagsArray,

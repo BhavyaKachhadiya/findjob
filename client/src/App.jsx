@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import Jobcard from './compontment/Jobcard';
+// import Jobcard from './compontment/Jobcard';
 import Addjobs from './compontment/Addjobs';
+import Filtercomp from './compontment/Filtercomp';
+import JobList from './compontment/Joblist';
 
 function App() {
   const [showAddJobs, setShowAddJobs] = useState(false);
-  const [jobData, setJobData] = useState([]);
+  // const [jobData, setJobData] = useState([]);
+
+  const [filters, setFilters] = useState({});
+
+  const handleFilterChange = (newFilters) => {
+    setFilters(newFilters);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -41,13 +49,17 @@ function App() {
       {showAddJobs ? (
         <Addjobs />
       ) : (
-        // <div className="flex justify-center">
-          <div className="grid grid-cols-3 place-items-center w-[1060px]">
-           {jobData.map((job) => (
-          <Jobcard key={job._id} job={job} />
-        ))}
+        <div className="containerr flex items-start">
+           <Filtercomp onFilterChange={handleFilterChange} />
+          <div className="flex justify-center">
+            <div className="grid grid-cols-3 place-items-center w-[1060px]">
+              {/* {jobData.map((job) => (
+                <Jobcard key={job._id} job={job} />
+              ))} */}
+              <JobList filters={filters} />
+            </div>
           </div>
-        // </div>
+        </div>
       )}
     </div>
   );
