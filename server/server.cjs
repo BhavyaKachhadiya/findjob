@@ -65,7 +65,7 @@ app.get("/api/jobs", async function(req, res) {
   });
 
   app.get('/api/jobs/filter', async (req, res) => {
-    const { tags, companyName } = req.query;
+    const { tags, companyName,post } = req.query;
   
     try {
       // Start with a base query
@@ -80,7 +80,9 @@ app.get("/api/jobs", async function(req, res) {
         const selectedCompanyName = companyName.split(',');
         query.companyName = { $in: selectedCompanyName };
       }
-  
+     
+     
+      
       // Use the Mongoose find method to filter jobs
       const filteredJobs = await jobsSchema.find(query);
   

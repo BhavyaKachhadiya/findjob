@@ -13,7 +13,7 @@ function JobList({ filters }) {
         let url = 'http://localhost:3000/api/jobs/filter';
 
         // Apply filters if available
-        if (filters && (filters.tags || filters.companies)) {
+        if (filters && (filters.tags || filters.companies || filters.searchPost)) {
           const params = new URLSearchParams(filters);
           url += `?${params.toString()}`;
           console.log(url);

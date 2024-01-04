@@ -1,33 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import './App.css';
-// import Jobcard from './compontment/Jobcard';
 import Addjobs from './compontment/Addjobs';
 import Filtercomp from './compontment/Filtercomp';
 import JobList from './compontment/Joblist';
 
 function App() {
   const [showAddJobs, setShowAddJobs] = useState(false);
-  // const [jobData, setJobData] = useState([]);
-
   const [filters, setFilters] = useState({});
 
   const handleFilterChange = (newFilters) => {
     setFilters(newFilters);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:3000/api/jobs');
-        setJobData(response.data); // Assuming data is an array of job objects
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const handleToggleAddJobs = () => {
     setShowAddJobs(!showAddJobs);

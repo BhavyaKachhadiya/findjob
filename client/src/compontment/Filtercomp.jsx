@@ -4,7 +4,7 @@ import axios from 'axios';
 function Filtercomp({ onFilterChange }) {
   const [tags, setTags] = useState([]);
   const [companyName, setCompanyName] = useState([]);
-  
+ 
   const handleCheckboxChange = () => {
     // Collect selected tags and company names
     const selectedTags = Array.from(document.querySelectorAll('input[name="tags"]:checked')).map(checkbox => checkbox.value);
@@ -13,7 +13,7 @@ function Filtercomp({ onFilterChange }) {
     // Call the provided callback with the selected filters
     onFilterChange({
       tags: selectedTags,
-      companyName: selectedCompanies
+      companyName: selectedCompanies, 
     });
   };
 
@@ -32,7 +32,7 @@ function Filtercomp({ onFilterChange }) {
 
     fetchTagsAndCompanyName();
   }, []);
-
+  
   return (
     <div className='h-[500px] w-[400px] rounded-lg m-2 bg-[#ffe1cc]'>
       <div id="filters" className='m-5'>
