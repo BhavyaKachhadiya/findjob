@@ -2,11 +2,15 @@ const mongoose = require("mongoose");
 const express = require("express");
 const { URL } = require('url');
 const cors = require('cors');
+require('dotenv').config();
 const app = express()
 app.use(express.json());
 const port = 3000
 app.use(cors());
-mongoose.connect("mongodb://127.0.0.1:27017/jobs",{ useNewUrlParser: true,useUnifiedTopology: true});
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 mongoose.connection.on('error', (err) => {
   console.error('MongoDB connection error:', err);
 });
