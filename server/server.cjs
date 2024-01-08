@@ -9,7 +9,8 @@ const port = 3000
 app.use(cors());
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000
 });
 mongoose.connection.on('error', (err) => {
   console.error('MongoDB connection error:', err);
