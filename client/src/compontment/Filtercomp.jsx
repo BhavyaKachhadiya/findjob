@@ -20,8 +20,8 @@ function Filtercomp({ onFilterChange }) {
   useEffect(() => {
     const fetchTagsAndCompanyName = async () => {
       try {
-        const tagsResponse = await axios.get('http://localhost:3000/api/tags');
-        const companyNameResponse = await axios.get('http://localhost:3000/api/companyName');
+        const tagsResponse = await axios.get('https://api-findjobs.vercel.app/api/tags');
+        const companyNameResponse = await axios.get('https://api-findjobs.vercel.app/api/companyName');
 
         setTags(tagsResponse.data);
         setCompanyName(companyNameResponse.data);

@@ -39,7 +39,7 @@ const Addjobs = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:3000/api/addjobs', {
+      const response = await fetch('https://api-findjobs.vercel.app/api/addjobs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

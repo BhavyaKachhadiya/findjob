@@ -10,7 +10,7 @@ function JobList({ filters }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        let url = 'http://localhost:3000/api/jobs/filter';
+        let url = 'https://api-findjobs.vercel.app/api/jobs/filter';
 
         // Apply filters if available
         if (filters && (filters.tags || filters.companies || filters.searchPost)) {
